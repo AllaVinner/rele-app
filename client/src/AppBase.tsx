@@ -1,5 +1,7 @@
 import { INavLink, INavLinkGroup, initializeIcons, Nav } from "@fluentui/react";
 import { makeStyles, tokens, Label } from "@fluentui/react-components";
+import Introduction from "./pages/introduction";
+import Page from "./pages/plotly_example"
 import React, { useState } from "react";
 
 // TODO: REMMEBER TO DO THIS
@@ -51,6 +53,20 @@ const defaultComponent = <div>Not Found</div>
 const navGroups: ComponentConfig[] = [
   {
     links: [
+      {
+        name: 'Introduction',
+        url: '',
+        key: 'introduction',
+        icon: 'ViewDashboard',
+        content: <Introduction />,
+      },
+      {
+        name: 'Plotly Example',
+        url: '',
+        key: 'plotly-example',
+        icon: 'ViewDashboard',
+        content: <Page />,
+      },
       {
         name: 'Dashboard',
         url: '',
@@ -123,7 +139,7 @@ const useStyles = makeStyles({
 })
 
 
-const AppBase: React.FC<AppBaseProps> = ({ children }) => {
+const AppBase: React.FC<AppBaseProps> = (_children) => {
   const styles = useStyles();
   const [selectedKey, setSelectedKey] = useState(navGroups[0].links[0].key);
 
