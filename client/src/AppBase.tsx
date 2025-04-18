@@ -2,6 +2,7 @@ import { INavLink, INavLinkGroup, initializeIcons, Nav } from "@fluentui/react";
 import { makeStyles, tokens, Label } from "@fluentui/react-components";
 import Introduction from "./pages/introduction";
 import Page from "./pages/plotly_example"
+import APIExample from "./pages/APIExample.tsx"
 import React, { useState } from "react";
 
 // TODO: REMMEBER TO DO THIS
@@ -66,6 +67,13 @@ const navGroups: ComponentConfig[] = [
         key: 'plotly-example',
         icon: 'ViewDashboard',
         content: <Page />,
+      },
+      {
+        name: 'API Example',
+        url: '',
+        key: 'api-example',
+        icon: 'ViewDashboard',
+        content: <APIExample />,
       },
       {
         name: 'Dashboard',
