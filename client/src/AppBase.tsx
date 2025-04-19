@@ -119,22 +119,24 @@ const useStyles = makeStyles({
     minHeight: 0,
     minWidth: 0,
     height: "100vh",
+    color: tokens.colorStrokeFocus2
   },
   navbar: {
     display: "flex",
     backgroundColor: tokens.colorBrandBackground,
     padding: "0 20px",
     height: "60px",
-    alignItems: "center"
+    alignItems: "center",
+    color: "red",
   },
   title: {
-    fontSize: tokens.fontSizeHero800
+    fontSize: tokens.fontSizeHero800,
+    color: tokens.colorStrokeFocus1,
   },
   appContent: {
     display: "flex",
     flex: 1,
     overflow: "hidden",
-    color: "black"
   },
   sidebar: {
     minWidth: "250px",

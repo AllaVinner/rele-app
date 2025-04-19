@@ -7,7 +7,6 @@
 
 .navbar {
   background-color: #0078d4;
-  color: white;
   padding: 0 20px;
   height: 60px;
   display: flex;
@@ -40,15 +39,4 @@
   overflow-y: auto;
 }
 
-/* Override some Fluent UI styles */
-.ms-Nav {
-  height: 100%;
-}
 
-.ms-CommandBar {
-  background-color: transparent;
-}
-
-.ms-CommandBar-primaryCommand {
-  color: white;
-}
