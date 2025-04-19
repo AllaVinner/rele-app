@@ -17,6 +17,6 @@ async def root():
     return {"message": "hello World"}
 
 
-@app.get("/api/basic")
-async def basic():
-    return {"message": "This is basic"}
+@app.get("/api/basic/{name}")
+async def basic(name: str = "Nothing"):
+    return {"message": f"This is some name {name}"}
