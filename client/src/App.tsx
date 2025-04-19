@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "react-query"
-import AppBase from "./AppBase"
+import AppRoot from "./AppRoot"
 import AppTheme from "./AppTheme"
 
 
@@ -10,8 +10,7 @@ function App() {
     <>
       <AppTheme>
         <QueryClientProvider client={queryClient}>
-          <AppBase>
-          </AppBase>
+          <AppRoot />
         </QueryClientProvider>
       </AppTheme>
     </>

@@ -1,4 +1,4 @@
-import { Combobox, makeStyles, Option, Label } from "@fluentui/react-components";
+import { Combobox, makeStyles, Option, Label, SelectionEvents, OptionOnSelectData } from "@fluentui/react-components";
 import axios from "axios";
 import React, { useState } from "react"
 import { useQuery, UseQueryResult } from "react-query";
@@ -58,7 +58,7 @@ const APIExample: React.FC<PageProps> = (_props) => {
   const styles = useStyles()
   const { data: posts, error, isLoading } = useQuery<BulletItem[], Error>("postsData", retrievePosts);
   const { data: basic } = useBasic(basicName)
-  const onOptionSelect = (ev, data) => {
+  const onOptionSelect = (_ev: SelectionEvents, data: OptionOnSelectData) => {
     setName(data.selectedOptions[0])
   }
   if (isLoading) return <div> NOT LOADED </div>
