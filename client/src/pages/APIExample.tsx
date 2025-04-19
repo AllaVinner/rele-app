@@ -1,7 +1,7 @@
-import { makeStyles } from "@fluentui/react-components";
+import { Combobox, makeStyles, Option, Label } from "@fluentui/react-components";
 import axios from "axios";
-import React from "react"
-import { useQuery } from "react-query";
+import React, { useState } from "react"
+import { useQuery, UseQueryResult } from "react-query";
 
 interface PageProps {
   children?: React.ReactNode
@@ -35,18 +35,32 @@ const retrievePosts = async (): Promise<BulletItem[]> => {
   return response.data
 }
 
-const retrieveBasicAPI = async (): Promise<Basic> => {
+const retrieveBasicAPI = async (name: string): Promise<Basic> => {
   const response = await axios.get(
-    `${API_BASE_URL}/basic`,
+    `${API_BASE_URL}/basic/${name}`,
   )
   return response.data
 }
 
 
+function useBasic(basicName: string): UseQueryResult<Basic> {
+  return useQuery({
+    queryKey: ["basic", basicName],
+    queryFn: () => retrieveBasicAPI(basicName),
+    enabled: !!basicName,
+  })
+}
+
+
 const APIExample: React.FC<PageProps> = (_props) => {
+  const options = ["Cat", "Dog", "Ferret", "Fish", "Hamster", "Snake"];
+  const [basicName, setName] = useState(options[0])
   const styles = useStyles()
   const { data: posts, error, isLoading } = useQuery<BulletItem[], Error>("postsData", retrievePosts);
-  const { data: basic } = useQuery<Basic, Error>("basicAPI", retrieveBasicAPI);
+  const { data: basic } = useBasic(basicName)
+  const onOptionSelect = (ev, data) => {
+    setName(data.selectedOptions[0])
+  }
   if (isLoading) return <div> NOT LOADED </div>
   if (error) return <div> GOT ERROR: {error.message} </div>
   if (!posts) return <div> A</div>
@@ -54,13 +68,28 @@ const APIExample: React.FC<PageProps> = (_props) => {
   return (
     <div className={styles.plotRoot}>
       <div>
+        <Label>From Webpage</Label>
+        <ul>
+          {posts.filter((_p, i) => i < 4).map((post) => (
+            <li key={post.id}>{post.title}</li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <Label> Static From Server </Label>
         {basic?.message}
       </div>
-      <ul>
-        {posts.map((post) => (
-          <li key={post.id}>{post.title}</li>
-        ))}
-      </ul>
+      <div>
+        <Combobox
+          placeholder="Select an animal" value={basicName} onOptionSelect={onOptionSelect}
+        >
+          {options.map((option) => (
+            <Option key={option}>
+              {option}
+            </Option>
+          ))}
+        </Combobox>
+      </div>
     </div>
   )
 }
